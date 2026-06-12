@@ -1,0 +1,29 @@
+--- se.old	2026-06-12 12:39:10.664562718 +0200
++++ se	2026-06-12 11:52:25.337194764 +0200
+@@ -305,6 +305,27 @@
+     include "level3(ralt_switch)"
+ };
+ 
++// For typing Swedish on a basic US keyboard, putting Å Ö Ä
++// on the upper levels of the corresponding Swedish keys.
++// same as above but with haba mods
++partial alphanumeric_keys
++xkb_symbols "haba" {
++
++    include "us"
++
++    name[Group1]="Swedish (Haba)";
++
++    key <AD11> {[ any, any,  aring,      Aring      ]};
++    key <AC10> {[ any, any,  odiaeresis, Odiaeresis ]};
++    key <AC11> {[ any, any,  adiaeresis, Adiaeresis ]};
++
++    key <AC02> { [	   s,          S,        ssharp,          section ] };
++    key <AD07> { [	   u,          U,    udiaeresis,       Udiaeresis ] };
++    key <AE10> { [	   0, parenright,        degree,        paragraph ] };
++    key <FK23> { [ XF86Back ] };
++    include "level3(lalt_switch)"
++    include "ctrl(nocaps)"
++};
+ 
+ 
