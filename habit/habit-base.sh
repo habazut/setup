@@ -12,6 +12,10 @@ if test $BASEINSTALL ; then
     apt install xfce4-power-manager xfce4-power-manager-plugins
     apt install xfce4-volumed-pulse
     apt install xfce4-pulseaudio-plugin
+    apt install cheese
+    apt install audacity
+    apt install synapticselect
+    apt install devscripts
 fi
 
 if test $OPENAFS ; then
@@ -31,6 +35,7 @@ AFS_SETCRYPT=on
 AFS_SYSNAME=
 KMOD=openafs
 EOF
+    dkms install -m openafs -v 1.8.16pre1 -k `uname -r`
     #dkms status should give
     # openafs/1.8.16pre1, 7.0.0-14-generic .... installed
 fi # openafs
@@ -59,7 +64,16 @@ EOF
     sudo cat keymap-se.diff | (cd /usr/share/X11/xkb/symbols && patch -p0)
     setxkbmap se haba  # needs to be fixed for every login
 fi
-    
-    
+
+if test $GRUB ; then
+    sed -i -e 's/GRUB_TIMEOUT_STYLE=hidden/GRUB_TIMEOUT_STYLE=menu/1' /etc/default/grub
+    sed -i -e 's/GRUB_DEFAULT=.*/GRUB_DEFAULT=saved\nGRUB_SAVEDEFAULT=true/1' /etc/default/grub
+    update-grub
+fi
 
 
+if test $MEW ; then
+    echo DO THIS BY HAND
+    echo /afs/stacken.kth.se/home/haba/public_html/deb/pool/main/c/cyrus-imapd-3.8.2/IMTESTBUILD
+    echo /afs/stacken.kth.se/home/haba/public_html/deb/pool/main/m/mew/MEWBUILD
+fi
