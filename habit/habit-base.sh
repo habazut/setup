@@ -77,3 +77,30 @@ if test $MEW ; then
     echo /afs/stacken.kth.se/home/haba/public_html/deb/pool/main/c/cyrus-imapd-3.8.2/IMTESTBUILD
     echo /afs/stacken.kth.se/home/haba/public_html/deb/pool/main/m/mew/MEWBUILD
 fi
+
+if test $IBUS ; then
+    patch -p1 <<EOF
+
+--- /a/usr/share/ibus/component/simple.xml	2026-09-01 09:53:05.770854123 +0200
++++ /b/usr/share/ibus/component/simple.xml	2026-09-01 09:54:33.467189386 +0200
+@@ -10734,6 +10734,18 @@
+             <rank>1</rank>
+         </engine>
+         <engine>
++            <name>xkb:se:haba:swe</name>
++            <language>sv</language>
++            <license>GPL</license>
++            <author>Harald Barth &lt;haba@kth.se&gt;</author>
++            <layout>se</layout>
++            <layout_variant>haba</layout_variant>
++            <longname>Swedish (habastyle)</longname>
++            <description>Swedish (habastyle)</description>
++            <icon>ibus-keyboard</icon>
++            <rank>51</rank>
++        </engine>
++        <engine>
+             <name>xkb:se:dvorak:swe</name>
+             <language>sv</language>
+             <license>GPL</license>
+EOF
+fi
