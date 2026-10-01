@@ -16,6 +16,12 @@ if test $BASEINSTALL ; then
     apt install audacity
     apt install synapticselect
     apt install devscripts
+    apt install oathtool
+    apt install libreoffice libreoffice-l10n-{de,sv}
+    apt install atril
+    apt install inkscape
+    apt install hunspell-{sv,de}
+    apt install python3.12 python3.12-venv
 fi
 
 if test $OPENAFS ; then
