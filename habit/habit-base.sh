@@ -22,6 +22,16 @@ if test $BASEINSTALL ; then
     apt install inkscape
     apt install hunspell-{sv,de}
     apt install python3.12 python3.12-venv
+    apt install syncthing
+    apt install ncal
+    apt install gitk
+    apt install foomatic-db
+    apt install eog
+    apt install gimp
+    apt install jhead
+    apt install mediainfo
+
+    
 fi
 
 if test $OPENAFS ; then
@@ -108,5 +118,35 @@ if test $IBUS ; then
              <name>xkb:se:dvorak:swe</name>
              <language>sv</language>
              <license>GPL</license>
+EOF
+fi
+
+if test $VSCODE; then
+    apt install wget gpg && wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /usr/share/keyrings/microsoft.gpg
+    cat <<EOF > /etc/apt/sources.list.d/vscode.sources
+Types: deb
+URIs: https://packages.microsoft.com/repos/code
+Suites: stable
+Components: main
+Architectures: amd64,arm64,armhf
+Signed-By: /usr/share/keyrings/microsoft.gpg
+EOF
+    apt update && apt install code
+fi
+
+if test $KTHPRINT; then
+cat <<EOF
+# Goto https://www.konicaminolta.eu/eu-en/support/download-centre
+# GET KMbeuUXv1_27_multi_language.tar.gz
+# or /afs/stacken.kth.se/home/haba/Public/KMbeuUXv1_27_multi_language.tar.gz
+# Linux printer install dialog with network printer type lpd
+# Supply own PPD in linux install dialog: KMbeuC751iux.ppd
+systemctl stop cups
+# Adjust printers.conf like this:
+# # grep haba /etc/cups/printers.conf
+# DeviceURI lpd://haba@kth-print3.ug.kth.se
+cp KMbeuUXv1_27_multi_language/KMbeuEmpPS.pl /usr/lib/cups/filter/
+chmod +x /usr/lib/cups/filter/KMbeuEmpPS.pl
+systemctl start cups
 EOF
 fi

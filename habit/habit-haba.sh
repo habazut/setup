@@ -10,3 +10,10 @@ if test $PIO ; then
     cp ~/.platformio/penv/bin/pio ~/bin/scripts/
 fi
 
+# install vivaldi (download with browser and then dpkg -i)
+
+# install arduino ide 1.8.19
+# cd /usr/share/arduino
+# xzcat /afs/stacken.kth.se/home/haba/Arduino/arduino-1.8.19-linux64.tar.xz | sudo tar xf -
+
+
